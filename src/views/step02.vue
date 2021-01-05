@@ -90,13 +90,7 @@
               <el-table-column prop="zip" label="所学专业"> </el-table-column>
               <el-table-column prop="zip" label="证书编号"> </el-table-column>
               <el-table-column label="操作">
-                <template slot-scope="scope">
-                  <el-button
-                    @click="handleClick(scope.row)"
-                    type="text"
-                    size="small"
-                    >编辑
-                  </el-button>
+                <template >
                   <el-button type="text" size="small">删除</el-button>
                 </template>
               </el-table-column>

@@ -74,7 +74,7 @@ export default {
             currentpage:'Promise' ,
             formdata : {
                 ag_01:{
-                   name:"1"
+                   
                 },
                  ag_02:{
                    list:[]

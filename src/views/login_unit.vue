@@ -16,15 +16,21 @@
 
           <el-form-item prop="unit" label="">
             单位：
-            <el-input
+              <el-select v-model="loginForm.unitId" placeholder="请选择单位名称" style="width:85%" ref="unitId">
+                <el-option label="广西大展宏图有限公司" value="广西大展宏图有限公司"></el-option>
+                <el-option label="广西壮族自治区信息安全评测中心" value="广西壮族自治区信息安全评测中心"></el-option>
+                <el-option label="中国电信广西公司" value="中国电信广西公司"></el-option>
+                <el-option label="广西国电南" value="广西国电南"></el-option>
+              </el-select>
+            <!-- <el-input
               style="width:85%"
               ref="unitId"
               v-model="loginForm.unitId"
               placeholder="请输入单位名称"
               type="text"
               tabindex="1"
-              auto-complete="on">
-            </el-input>
+              auto-complete="on"> 
+            </el-input>-->
           </el-form-item>
 
           <el-form-item prop="username" label="">
@@ -109,7 +115,7 @@ export default {
     }
     return {
       loginForm: {
-        unitId: "1",
+        unitId: "",
         username: '',
         password: ''
       },
@@ -143,6 +149,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          this.loginForm.unitId = 1
           api.loginUnit(this.loginForm).then(res => {
               const resp = res.data;
         //  1.保存token，用户信息
