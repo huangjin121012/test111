@@ -14,7 +14,11 @@
         <el-table-column prop="level" label="学位"> </el-table-column>
         <el-table-column prop="school" label="毕业学校"> </el-table-column>
         <el-table-column prop="profession" label="专业"> </el-table-column>
-        <el-table-column prop="certificateNumber" label="毕业证编号">
+        <el-table-column prop="certificateNumber" label="毕业证编号"></el-table-column>
+        <el-table-column prop="proveUrl" label="证明材料">
+          <template slot-scope="scope">
+            <el-image style="width: 100px; height: 100px" :src="scope.row.proveUrl"></el-image>
+          </template>
         </el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
@@ -57,6 +61,17 @@
             placeholder="证书编号"
           ></el-input>
         </el-form-item>
+        <el-form-item label="证书材料">
+         <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="educationDialogVisible = false">取 消</el-button>
@@ -85,7 +100,9 @@ export default {
         school: "",
         profession: "",
         certificateNumber: "",
+        proveUrl: ''
       },
+      imageUrl: '',
       educationDialogVisible: false,
     };
   },
@@ -133,6 +150,12 @@ export default {
       const res = await api.list(this.evaluation_id);
       if (res.code == 0) {
         this.formdata.ag_02.list = res.data;
+      }
+    },
+    handleAvatarSuccess(res) {
+      if (res.code == 0) {
+        this.imageUrl = "http://localhost:8486/show/" + res.data.path;
+        this.study.proveUrl = "http://localhost:8486/show/" + res.data.path;
       }
     },
     async handleDelete(id) {

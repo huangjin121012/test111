@@ -15,7 +15,11 @@
         </el-table-column>
         <el-table-column prop="position" label="职位"> </el-table-column>
         <el-table-column prop="witness" label="证明人"> </el-table-column>
-
+        <el-table-column prop="proveUrl" label="辅助证明材料"> 
+          <template slot-scope="scope">
+            <el-image style="width: 100px; height: 100px" :src="scope.row.proveUrl"></el-image>
+          </template>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -60,6 +64,17 @@
         <el-form-item label="证明人">
           <el-input v-model="study.witness" placeholder="证明人"></el-input>
         </el-form-item>
+        <el-form-item label="证明材料">
+         <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="visible = false">取 消</el-button>
@@ -86,8 +101,10 @@ export default {
         unit: "",
         event: "",
         position: "",
-        witness: ""
+        witness: "",
+        proveUrl: ''
       },
+      imageUrl: '',
       visible: false
     };
   },
@@ -109,6 +126,12 @@ export default {
     },
     add_stu: function() {
       this.visible = true;
+    },
+    handleAvatarSuccess(res) {
+      if (res.code == 0) {
+        this.imageUrl = "http://localhost:8486/show/" + res.data.path;
+        this.study.proveUrl = "http://localhost:8486/show/" + res.data.path;
+      }
     },
     async handleSubmit() {
       const res = await api.add(this.evaluation_id, this.study);

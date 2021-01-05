@@ -2,68 +2,73 @@
   <div class="com_eva">
     <Menu></Menu>
     <div class="bd">
-      <div class="add" @click="educationDialogVisible = true">+新建数据</div>
-      <div class="pace">
-        <h4>
-          职称评审
-          <span>编辑</span>
-        </h4>
-        <div class="proccess">
-          <div class="container">
-            <div class="skills ht" :style="{ '--progress': progress }">
-              &nbsp;
-            </div>
-          </div>
-          <div class="container2">
-            <span>个人申报</span>
-            <span>单位审核</span>
-            <span>主管单位/职改办推荐</span>
-            <span>评委会所在职改办</span>
-            <span>材料报送成功</span>
-          </div>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>职称评审</span>
+          <el-button
+            style="float: right; padding: 3px 0"
+            type="text"
+            @click="educationDialogVisible = true"
+            >新建数据</el-button
+          >
         </div>
-
-        <table>
-          <tr>
-            <td>申报年度</td>
-            <td>2020</td>
-            <td>评委会所属职改办</td>
-            <td>办公室占位</td>
-          </tr>
-          <tr>
-            <td>拟申报资格名称</td>
-            <td>{{ msg }}/{{ level }}</td>
-            <td>评审会名称</td>
-            <td>{{ office }}</td>
-          </tr>
-          <tr>
-            <td>评审等级</td>
-            <td>{{ level }}</td>
-            <td>创建时间</td>
-            <td>{{ time }}</td>
-          </tr>
-          <tr>
-            <td>材料报送时间段</td>
-            <td colspan="3">（占位）</td>
-          </tr>
-        </table>
-      </div>
-
+        <el-card>
+          <h3 style="color:red">填报说明</h3>
+          <br />
+          <div style="color:red">
+            欢迎您参加广西壮族自治区专业技术资格的申报，为使您更为准确的掌握申报评审的相关政策，减少因政策原因导致的申报障碍，敬请认真阅读并掌握评审相关的政策规定。主要包括以下政策：
+            1.国家、自治区职称管理方面的政策文件；
+            2.关于专业技术资格评审的一般程序规定及要求；
+            3.个人所选择申报系列的专业技术资格评审条件；
+            4.相关专项职称评审政策；
+            5.当年度的自治区评审部署文件及所选择申报系列的评审部署文件；
+            6.其他根据个人情况需要掌握的职称政策；
+            以上政策均可在广西壮族自治区人力资源和社会保障厅网站上“年度职称评审工作专题”查询到；如网站查询不到或对政策文件把握不准，您也可根据我们在该网站提供的联系方式选择到您申报的评委会咨询了解。
+          </div>
+        </el-card>
+        <br />      
+        <el-card class="box-card"  v-for="(item) in data" :key="item.id" :offset="1" style="margin-top:15px">
+          <div slot="header" class="clearfix">
+            <span>职称评审</span>
+            <el-button style="float: right; padding: 3px 0" type="text"
+              >编辑</el-button
+            >
+          </div>
+          <table>
+            <tr>
+              <td>申报年度</td>
+              <td>2021</td>
+              <td>评委会所属职改办</td>
+              <td>桂林电子科技大学职称改革工作领导小组办公室</td>
+            </tr>
+            <tr>
+              <td>拟申报资格名称</td>
+              <td>{{ item.source }}/{{  item.level | award }}</td>
+              <td>评审会名称</td>
+              <td>{{ item.jury }}</td>
+            </tr>
+            <tr>
+              <td>评审等级</td>
+              <td>{{  item.level | award }}</td>
+              <td>创建时间</td>
+              <td>{{ item.createTime }}</td>
+            </tr>
+          </table>
+        </el-card>   
+      </el-card>
 
       <div class="mask" ref="mask"></div>
     </div>
     <el-dialog
       title="选择评审会"
       :visible.sync="educationDialogVisible"
-      width="55%"
-    >
-      <!-- <h4>申报年度：2020</h4>  :model="form"-->
+      width="55%">
       <el-form label-position="right" label-width="125px">
         <el-form-item label="申报等级">
           <el-radio-group v-model="form.level" style="width:100%">
-            <el-radio-button label="初级" ></el-radio-button>
-            <el-radio-button label="中级" ></el-radio-button>
-            <el-radio-button label="副高级" ></el-radio-button>
+            <el-radio-button label="初级"></el-radio-button>
+            <el-radio-button label="中级"></el-radio-button>
+            <el-radio-button label="副高级"></el-radio-button>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="申报系列">
@@ -83,7 +88,11 @@
           </el-select>
         </el-form-item>
         <el-form-item label="申报评审会">
-          <el-select v-model="form.jury" style="width:100%" placeholder="请选择申报评审会">
+          <el-select
+            v-model="form.jury"
+            style="width:100%"
+            placeholder="请选择申报评审会"
+          >
             <el-option
               v-for="item in options1"
               :key="item.value"
@@ -96,9 +105,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="educationDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleSubmit"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="handleSubmit">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -107,7 +114,7 @@
 <script>
 import Menu from "../views/menu";
 import * as api from "../api/evaluation";
-import { Message } from 'element-ui'
+import { Message } from "element-ui";
 export default {
   name: "company_evaluation",
   components: {
@@ -123,11 +130,12 @@ export default {
       year: "",
       current: 1,
       progress: "25%", //进度
-      form:{
-         level:"初级",
-         jury:"",
-         source:"",
+      form: {
+        level: "初级",
+        jury: "",
+        source: ""
       },
+      data: {},
       options: [
         {
           value: "1",
@@ -154,6 +162,26 @@ export default {
       value: "",
       value1: ""
     };
+  },
+  filters: {
+    award: function(value) {
+      switch (value) {
+        case 0:
+          return "初级";
+          break;
+        case 1:
+          return "中级";
+          break;
+        case 2:
+          return "副高级";
+          break;
+        default:
+          return "其他";
+      }
+    }
+  },
+  created() {
+    this.getData();
   },
   methods: {
     selectChanged(value) {
@@ -212,7 +240,7 @@ export default {
             value1: "3",
             label:
               "高等学校教师系列桂林理工大学评委会【桂林理工大学职称改革工作领导小组办公室】"
-          },
+          }
         ];
       } else if (value == "工程系列") {
         this.options1 = [
@@ -230,26 +258,33 @@ export default {
             value1: "3",
             label:
               "工程系列北海市市政管理行业职称评审委员会【北海市工程系列市政管理行业职称改革工作领导小组]"
-          },
+          }
         ];
       }
     },
-   async handleSubmit(){
-     let level = this.form.level
-     let form = this.form
-     if(level=="初级") level = 0
-     else if(level == "中级") level = 1
-     else level = 2
-     const res =  await api.add({
-        level:level,
-        jury:form.jury,
-        source:form.source,
-        userId:localStorage.getItem("user_id")
-     })
-     if(res.code == 0){
-       localStorage.setItem("evaluation_id",res.data.id)
-       this.$router.push("agreement")
-     }
+    async handleSubmit() {
+      let level = this.form.level;
+      let form = this.form;
+      if (level == "初级") level = 0;
+      else if (level == "中级") level = 1;
+      else level = 2;
+      const res = await api.add({
+        level: level,
+        jury: form.jury,
+        source: form.source,
+        userId: localStorage.getItem("user_id")
+      });
+      if (res.code == 0) {
+        localStorage.setItem("evaluation_id", res.data.id);
+        this.$router.push("agreement");
+      }
+    },
+    async getData() {
+      const res = await api.list(-1);
+      if (res.code == 0) {
+        this.data = res.data.list
+        console.log(this.data);
+      }
     }
   }
 };
@@ -267,7 +302,7 @@ table td,
 table th {
   border: 1px solid #cad9ea;
   color: #666;
-  height: 30px;
+  height: 50px;
 }
 table thead th {
   background-color: #cce8eb;

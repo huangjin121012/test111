@@ -6,234 +6,7 @@
           <div></div>
         </div>
         <div class="table">
-          <!-- <table>
-                        <tr class="company" >
-                            <td colspan="5" > 
-                                <span>*</span> 
-                            单位（请在下拉列表中选择，如无法搜索到所需的单位信息，请先进行注册）
-                            </td>
 
-                        </tr>
-                         <tr>
-                            <td colspan="5" > <input type="text" placeholder="请输入单位名称关键字" style="width:94%"></td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                <span>*</span>
-                                单位级别
-                            </td>
-                            <td>
-                                <span>*</span>
-                                个人身份性质
-                            </td>
-                            <td>
-                                <span>*</span>
-                                评审年度
-                            </td>
-                            <td>
-                                <span>*</span>
-                                姓名（现名）
-                            </td>
-                            <td>
-                                <span>*</span>
-                                姓名（曾用名）
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input v-model="formdata.ag_01.name" type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>
-                                <span>*</span>
-                                性别
-                            </td>
-                            <td>
-                                <span>*</span>
-                                民族
-                            </td>
-                            <td>
-                                <span>*</span>
-                                证件号码
-                            </td>
-                            <td>
-                                <span>*</span>
-                                出生年月
-                            </td>
-                            <td>
-                                <span>*</span>
-                                填表时间
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>
-                                <span>*</span>
-                                参加工作时间
-                            </td>
-                            <td>
-                                <span>*</span>
-                                专业技术工作年限
-                            </td>
-                            <td>
-                                <span>*</span>
-                                参加评审会
-                            </td>
-                            <td>
-                                <span>*</span>
-                                拟评职称系列
-                            </td>
-                            <td>
-                                <span>*</span>
-                                拟评专业
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="cols">
-                                <span>*</span>
-                                拟评专业技术资格
-                            </td>
-                            
-                            <td>
-                               行政职务
-                            </td>
-                            <td>
-                                
-                                行政职务任命时间
-                            </td>
-                            <td>
-                                
-                                行政职务说明
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="cols">
-                                <input type="text">
-                            </td>
-                            
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span>*</span>
-                                联系电话
-                            </td>
-                            <td>
-                                <span>*</span>
-                                电子邮箱
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text">
-                            </td>
-                            <td>
-                                <input type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <span>*</span>
-                                档案所在地机构名称
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <input type="text" style="width:94%">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                政治面貌
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <input type="text" style="width:94%">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                
-                                籍贯
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <input type="text" style="width:94%">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <span>*</span>
-                                联系地址
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <input type="text" style="width:94%">
-                            </td>
-                        </tr>
-                       
-                    </table> -->
           <el-form :inline="true" label-width="100px">
             <el-card class="demo-form-inline">
               <!--  -->
@@ -242,30 +15,51 @@
               </el-form-item>
               <!--  -->
               <el-form-item label="单位级别">
-                <el-input v-model="formdata.ag_01.unitLevel" placeholder="单位级别"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.unitLevel"
+                  placeholder="单位级别"
+                ></el-input>
               </el-form-item>
               <el-form-item label="姓名">
-                <el-input v-model="formdata.ag_01.name" placeholder="姓名"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.name"
+                  placeholder="姓名"
+                ></el-input>
               </el-form-item>
               <el-form-item label="曾用名">
-                <el-input v-model="formdata.ag_01.oldname" placeholder="曾用名"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.oldname"
+                  placeholder="曾用名"
+                ></el-input>
               </el-form-item>
               <el-form-item label="身份证件号码">
-                <el-input v-model="formdata.ag_01.idcard" placeholder="身份证件号码"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.idcard"
+                  placeholder="身份证件号码"
+                ></el-input>
               </el-form-item>
               <el-form-item label="民族">
-                <el-input v-model="formdata.ag_01.nation" placeholder="民族"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.nation"
+                  placeholder="民族"
+                ></el-input>
               </el-form-item>
               <el-form-item label="参加评审会">
-                <el-input  v-model="formdata.ag_01.jury" placeholder="参加评审会"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.jury"
+                  placeholder="参加评审会"
+                ></el-input>
               </el-form-item>
               <!--  -->
               <el-form-item label="籍贯">
-                <el-input  placeholder="籍贯"></el-input>
+                <el-input placeholder="籍贯"></el-input>
               </el-form-item>
               <!--  -->
               <el-form-item label="联系电话">
-                <el-input v-model="formdata.ag_01.phone" placeholder="联系电话"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.phone"
+                  placeholder="联系电话"
+                ></el-input>
               </el-form-item>
               <!--  -->
               <el-form-item label="评审专业系列">
@@ -277,10 +71,16 @@
               </el-form-item>
               <!--  -->
               <el-form-item label="政治面貌">
-                <el-input v-model="formdata.ag_01.political" placeholder="政治面貌"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.political"
+                  placeholder="政治面貌"
+                ></el-input>
               </el-form-item>
               <el-form-item label="个人身份性质">
-                <el-input v-model="formdata.ag_01.property" placeholder="个人身份性质"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.property"
+                  placeholder="个人身份性质"
+                ></el-input>
               </el-form-item>
               <el-form-item label="出生年月">
                 <el-date-picker
@@ -306,16 +106,28 @@
                 ></el-date-picker>
               </el-form-item>
               <el-form-item label="工作年限">
-                <el-input v-model="formdata.ag_01.skillAge" placeholder="工作年限"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.skillAge"
+                  placeholder="工作年限"
+                ></el-input>
               </el-form-item>
               <el-form-item label="邮箱">
-                <el-input v-model="formdata.ag_01.email" placeholder="邮箱"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.email"
+                  placeholder="邮箱"
+                ></el-input>
               </el-form-item>
               <el-form-item label="档案所在机构">
-                <el-input v-model="formdata.ag_01.filePlace" placeholder="档案所在机构"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.filePlace"
+                  placeholder="档案所在机构"
+                ></el-input>
               </el-form-item>
               <el-form-item label="行政职务">
-                <el-input v-model="formdata.ag_01.position" placeholder="行政职务"></el-input>
+                <el-input
+                  v-model="formdata.ag_01.position"
+                  placeholder="行政职务"
+                ></el-input>
               </el-form-item>
               <el-form-item label="职务任命时间">
                 <el-date-picker
@@ -334,41 +146,19 @@
         </div>
         <div class="npg">
           <ul>
-            <li style="margin-left: 200px;">
+            <li style="margin-left: 100px;">
               <h4>
                 <span>*</span>
                 身份证正面图片（限1张）
                 <el-upload
-                  action="#"
-                  list-type="picture-card"
-                  :auto-upload="false"
-                  style="margin-top: 38px;margin-left: 50px;">
-                  <i slot="default" class="el-icon-plus"></i>
-                  <div slot="file" slot-scope="{ file }">
-                    <img
-                      class="el-upload-list__item-thumbnail"
-                      :src="formdata.ag_01.frontUrl"
-                      alt=""/>
-                    <span class="el-upload-list__item-actions">
-                      <span
-                        class="el-upload-list__item-preview"
-                        @click="handlePictureCardPreview(file)">
-                        <i class="el-icon-zoom-in"></i>
-                      </span>
-                      <span
-                        v-if="!disabled"
-                        class="el-upload-list__item-delete"
-                        @click="handleDownload(file)">
-                        <i class="el-icon-download"></i>
-                      </span>
-                      <span
-                        v-if="!disabled"
-                        class="el-upload-list__item-delete"
-                        @click="handleRemove(file)">
-                        <i class="el-icon-delete"></i>
-                      </span>
-                    </span>
-                  </div>
+                  style="margin-left: 40px;margin-top: 12px;"
+                  class="avatar-uploader"
+                  action="http://localhost:8486/system/upload"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess"
+                >
+                  <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </h4>
             </li>
@@ -377,74 +167,30 @@
                 <span>*</span>
                 身份证反面图片（限1张）
                 <el-upload
-                  action="#"
-                  list-type="picture-card"
-                  :auto-upload="false"
-                  style="margin-top: 38px;margin-left: 50px;">
-                  <i slot="default" class="el-icon-plus"></i>
-                  <div slot="file" slot-scope="{ file }">
-                    <img
-                      class="el-upload-list__item-thumbnail"
-                      :src="formdata.ag_01.reverseUrl"
-                      alt=""/>
-                    <span class="el-upload-list__item-actions">
-                      <span
-                        class="el-upload-list__item-preview"
-                        @click="handlePictureCardPreview(file)">
-                        <i class="el-icon-zoom-in"></i>
-                      </span>
-                      <span
-                        v-if="!disabled"
-                        class="el-upload-list__item-delete"
-                        @click="handleDownload(file)">
-                        <i class="el-icon-download"></i>
-                      </span>
-                      <span
-                        v-if="!disabled"
-                        class="el-upload-list__item-delete"
-                        @click="handleRemove(file)">
-                        <i class="el-icon-delete"></i>
-                      </span>
-                    </span>
-                  </div>
+                  style="margin-left: 40px;margin-top: 12px;"
+                  class="avatar-uploader"
+                  action="http://localhost:8486/system/upload"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess1"
+                >
+                  <img v-if="imageUrl1" :src="imageUrl1" class="avatar" />
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </h4>
             </li>
             <li>
               <h4>
                 <span>*</span>
-                近期免冠2寸照片（限1张）
+                手持身份证照片（限1张）
                 <el-upload
-                  action="#"
-                  list-type="picture-card"
-                  :auto-upload="false"
-                  style="margin-top: 38px;margin-left: 50px;">
-                  <i slot="default" class="el-icon-plus"></i>
-                  <div slot="file" slot-scope="{ file }">
-                    <img
-                      class="el-upload-list__item-thumbnail"
-                      :src="file.url"
-                      alt=""/>
-                    <span class="el-upload-list__item-actions">
-                      <span
-                        class="el-upload-list__item-preview"
-                        @click="handlePictureCardPreview(file)">
-                        <i class="el-icon-zoom-in"></i>
-                      </span>
-                      <span
-                        v-if="!disabled"
-                        class="el-upload-list__item-delete"
-                        @click="handleDownload(file)">
-                        <i class="el-icon-download"></i>
-                      </span>
-                      <span
-                        v-if="!disabled"
-                        class="el-upload-list__item-delete"
-                        @click="handleRemove(file)">
-                        <i class="el-icon-delete"></i>
-                      </span>
-                    </span>
-                  </div>
+                  style="margin-left: 40px;margin-top: 12px;"
+                  class="avatar-uploader"
+                  action="http://localhost:8486/system/upload"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess1"
+                >
+                  <img v-if="imageUrl2" :src="imageUrl1" class="avatar" />
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </h4>
             </li>
@@ -463,7 +209,11 @@ export default {
     formdata: Object
   },
   data() {
-    return {};
+    return {
+          imageUrl: '',
+          imageUrl1: '',
+          imageUrl2: ''
+    };
   },
 
   created() {
@@ -473,14 +223,24 @@ export default {
     test() {
       this.$emit("printf", "sada");
     },
-    handleRemove(file) {
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
-      handleDownload(file) {
+     handleAvatarSuccess(res) {
+      if (res.code == 0) {
+        this.imageUrl = "http://localhost:8486/show/" + res.data.path;
+        this.formdata.ag_01.frontUrl = "http://localhost:8486/show/" + res.data.path;
       }
+    },
+    handleAvatarSuccess1(res) {
+      if (res.code == 0) {
+        this.imageUrl1 = "http://localhost:8486/show/" + res.data.path;
+        this.formdata.ag_01.reverseUrl = "http://localhost:8486/show/" + res.data.path;
+      }
+    },
+    handleAvatarSuccess2(res) {
+      if (res.code == 0) {
+        this.imageUrl2 = "http://localhost:8486/show/" + res.data.path;
+        this.formdata.ag_01.image = "http://localhost:8486/show/" + res.data.path;
+      }
+    },
   }
 };
 </script>
@@ -523,6 +283,7 @@ export default {
   width: 100%;
   font-size: 14px;
   border: 0;
+  
 }
 .form1 .table table .cols input {
   width: 85%;

@@ -9,7 +9,7 @@
         <el-table-column prop="name" label="材料名称"></el-table-column>
         <el-table-column prop="proveUrl" label="材料" >
           <template slot-scope="scope">
-          <el-image style="width: 100px; height: 100px" :src="scope.row.proveUrl"></el-image>
+            <el-image style="width: 100px; height: 100px" :src="scope.row.proveUrl"></el-image>
           </template>
         </el-table-column>
 
@@ -37,41 +37,13 @@
         </el-form-item>
         <el-form-item label="材料">
           <el-upload
-            action="#"
-            list-type="picture-card"
-            :auto-upload="false"
-            style="margin-top: 38px;margin-left: 50px;"
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
           >
-            <i slot="default" class="el-icon-plus"></i>
-            <div slot="file" slot-scope="{ file }">
-              <img
-                class="el-upload-list__item-thumbnail"
-                :src="trainPerson.proveUrl"
-                alt=""
-              />
-              <span class="el-upload-list__item-actions">
-                <span
-                  class="el-upload-list__item-preview"
-                  @click="handlePictureCardPreview(file)"
-                >
-                  <i class="el-icon-zoom-in"></i>
-                </span>
-                <span
-                  v-if="!disabled"
-                  class="el-upload-list__item-delete"
-                  @click="handleDownload(file)"
-                >
-                  <i class="el-icon-download"></i>
-                </span>
-                <span
-                  v-if="!disabled"
-                  class="el-upload-list__item-delete"
-                  @click="handleRemove(file)"
-                >
-                  <i class="el-icon-delete"></i>
-                </span>
-              </span>
-            </div>
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
       </el-form>
@@ -99,7 +71,8 @@ export default {
       trainPerson: {
         name: "",
         proveUrl: ""
-      }
+      },
+      imageUrl: ''
     };
   },
   methods: {
@@ -120,6 +93,12 @@ export default {
     },
     add_stu: function() {
       this.visible = true;
+    },
+    handleAvatarSuccess(res) {
+      if (res.code == 0) {
+        this.imageUrl = "http://localhost:8486/show/" + res.data.path;
+        this.trainPerson.proveUrl = "http://localhost:8486/show/" + res.data.path;
+      }
     },
     async handleSubmit() {
       const res = await api.add(this.evaluation_id, this.trainPerson);

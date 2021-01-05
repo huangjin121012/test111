@@ -5,34 +5,20 @@
         国（境）工作或研究材料
         <div class="add" @click="add_stu">新增</div>
       </h4>
-      <!-- <table>
-                <tr>
-                    <th>开始时间</th>
-                    <th>截止时间</th>
-                    <th>工作单位</th>
-                    <th>职务岗位</th>
-                    <th>操作</th>
-                    <th>操作</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <div class="edit">编辑</div>
-                        <div class="del">删除</div>
-                    </td>
-                </tr>
-            </table> -->
       <el-table :data="formdata.ag_10.list" style="width: 100%">
         <el-table-column prop="startTime" label="开始时间" width="180">
         </el-table-column>
         <el-table-column prop="endTime" label="截止时间"> </el-table-column>
         <el-table-column prop="unit" label="工作单位"> </el-table-column>
         <el-table-column prop="job" label="职务岗位"> </el-table-column>
-
+        <el-table-column prop="proveUrl" label="证明材料">
+          <template slot-scope="scope">
+            <el-image
+              style="width: 100px; height: 100px"
+              :src="scope.row.proveUrl"
+            ></el-image>
+          </template>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -46,81 +32,6 @@
       </el-table>
     </div>
     <div class="mask" ref="mask" @click="cancel_add"></div>
-    <!-- <div class="add_stu scroll" ref="add_stu">
-
-            <table>
-                <tr>
-                    <th>新增国（境）工作或研究材料</th>
-                    <th>
-                        <div @click="cancel_add">取消</div>
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <span>*</span>
-                        开始时间
-                    </td>
-                    <td>
-                        <span>*</span>
-                        截止时间
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>*</span>
-                        工作单位
-                    </td>
-                    <td>
-                        职务岗位
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <span>*</span>
-                        工作内容
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <textarea name="" id="" cols="30" rows="10" style="resize: vertical"></textarea>
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td colspan="2"> 辅助证明材料</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div class="npg">
-                            <img src="" alt="">
-                            <input type="file" style="display:none">
-                        </div>
-                        
-                    </td>
-                </tr>
-               
-
-            </table>
-            <div class="confirme">确认</div>
-            <div class="cancel" @click="cancel_add">取消</div>
-        </div> -->
     <el-dialog
       title="新增国（境）工作或研究材料"
       :visible.sync="visible"
@@ -148,7 +59,18 @@
           <el-input v-model="abroad.job" placeholder="职务岗位"></el-input>
         </el-form-item>
         <el-form-item label="工作内容">
-          <el-input v-model="abroad.content" placeholder="工作内容"></el-input>
+          <el-input v-model="abroad.content" type="textarea" placeholder="工作内容"></el-input>
+        </el-form-item>
+        <el-form-item label="证明材料">
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -174,8 +96,11 @@ export default {
         endTime: "",
         unit: "",
         job: "",
-        content: ""
+        content: "",
+        proveUrl: ''
       },
+
+      imageUrl: "",
       visible: false
     };
   },
@@ -197,6 +122,12 @@ export default {
     },
     add_stu: function() {
       this.visible = true;
+    },
+        handleAvatarSuccess(res) {
+      if (res.code == 0) {
+        this.imageUrl = "http://localhost:8486/show/" + res.data.path;
+        this.abroad.proveUrl = "http://localhost:8486/show/" + res.data.path;
+      }
     },
     async handleSubmit() {
       const res = await api.add(this.evaluation_id, this.abroad);

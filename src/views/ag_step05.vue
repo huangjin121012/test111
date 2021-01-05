@@ -6,13 +6,38 @@
         <div class="add" @click="add_stu">新增</div>
       </h4>
       <el-table :data="formdata.ag_05.list" style="width: 100%">
-        <el-table-column prop="publishTime" label="发表时间">
+        <el-table-column prop="publishTime" label="发表时间"> </el-table-column>
+        <el-table-column prop="level" label="论文级别"> 
+          <template slot-scope="scope">
+            {{ scope.row.level | award }}
+          </template>
         </el-table-column>
-        <el-table-column prop="category" label="论文类别"> </el-table-column>
-        <el-table-column prop="name" label="论文著作名称">
+        <el-table-column prop="name" label="论文著作名称"> </el-table-column>
+        <el-table-column prop="number" label="登载刊物名称"> </el-table-column>
+        <el-table-column prop="coverUrl" label="论文封面">
+          <template slot-scope="scope">
+            <el-image
+              style="width: 100px; height: 100px"
+              :src="scope.row.coverUrl"
+            ></el-image>
+          </template>
         </el-table-column>
-        <el-table-column prop="number" label="登载刊物名称、刊号"> </el-table-column>
-        <el-table-column prop="role" label="角色"> </el-table-column>
+        <el-table-column prop="catalogUrl" label="论文目录">
+          <template slot-scope="scope">
+            <el-image
+              style="width: 100px; height: 100px"
+              :src="scope.row.catalogUrl"
+            ></el-image>
+          </template>
+        </el-table-column>
+        <el-table-column prop="contentUrl" label="论文内容">
+          <template slot-scope="scope">
+            <el-image
+              style="width: 100px; height: 100px"
+              :src="scope.row.contentUrl"
+            ></el-image>
+          </template>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -35,23 +60,59 @@
             placeholder="发表时间"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item label="论文类别">
-          <el-input
-            v-model="paper.category"
-            placeholder="论文类别"
-          ></el-input>
+        <el-form-item label="论文级别">
+          <el-select v-model="paper.level" placeholder="奖励等级">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="角色">
-          <el-input
-            v-model="paper.role"
-            placeholder="角色"
-          ></el-input>
-        </el-form-item>
+
         <el-form-item label="论文名称">
           <el-input v-model="paper.name" placeholder="论文著作名称"></el-input>
         </el-form-item>
         <el-form-item label="登载刊物刊号">
-          <el-input v-model="paper.number" placeholder="登载刊物名称、刊号"></el-input>
+          <el-input
+            v-model="paper.number"
+            placeholder="登载刊物名称、刊号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="论文封面">
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="论文目录">
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess1"
+          >
+            <img v-if="imageUrl1" :src="imageUrl1" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="论文内容">
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess2"
+          >
+            <img v-if="imageUrl2" :src="imageUrl2" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -71,17 +132,49 @@ export default {
     formdata: Object
   },
   data() {
-      return {
-          form: {},
-          paper: {
-              publishTime: '',
-              category: '',
-              role: '',
-              name: '',
-              number: ''
-          },
-          visible: false
-      }
+    return {
+      form: {},
+      paper: {
+        publishTime: "",
+        level: "",
+        role: "",
+        name: "",
+        number: "",
+        coverUrl: "",
+        catalogUrl: "",
+        contentUrl: ""
+      },
+      options: [
+        {
+          value: "1",
+          label: "特种刊物论文"
+        },
+        {
+          value: "2",
+          label: "权威核心刊物论文"
+        },
+        {
+          value: "3",
+          label: "重要核心刊物论文"
+        },
+        {
+          value: "4",
+          label: "一般核心刊物论文"
+        },
+        {
+          value: "5",
+          label: "一般公开刊物论文"
+        },
+        {
+          value: "0",
+          label: "受限公开刊物论文"
+        }
+      ],
+      visible: false,
+      imageUrl: "",
+      imageUrl1: "",
+      imageUrl2: ""
+    };
   },
   methods: {
     ban_scoall: function() {
@@ -100,7 +193,25 @@ export default {
       this.start_scoall();
     },
     add_stu: function() {
-        this.visible = true;
+      this.visible = true;
+    },
+    handleAvatarSuccess(res) {
+      if (res.code == 0) {
+        this.imageUrl = "http://localhost:8486/show/" + res.data.path;
+        this.paper.coverUrl = "http://localhost:8486/show/" + res.data.path;
+      }
+    },
+    handleAvatarSuccess1(res) {
+      if (res.code == 0) {
+        this.imageUrl1 = "http://localhost:8486/show/" + res.data.path;
+        this.paper.catalogUrl = "http://localhost:8486/show/" + res.data.path;
+      }
+    },
+    handleAvatarSuccess2(res) {
+      if (res.code == 0) {
+        this.imageUrl2 = "http://localhost:8486/show/" + res.data.path;
+        this.paper.contentUrl = "http://localhost:8486/show/" + res.data.path;
+      }
     },
     async handleSubmit() {
       const res = await api.add(this.evaluation_id, this.paper);
@@ -112,11 +223,14 @@ export default {
           duration: 2 * 1000
         });
         this.paper = {
-          publishTime: '',
-              category: '',
-              role: '',
-              name: '',
-              number: ''
+          publishTime: "",
+          level: "",
+          role: "",
+          name: "",
+          number: "",
+          coverUrl: "",
+          catalogUrl: "",
+          contentUrl: ""
         };
         this.visible = false;
         this.requestData();
@@ -143,8 +257,30 @@ export default {
   created() {
     this.evaluation_id = localStorage.getItem("evaluation_id");
     this.requestData();
+  },
+  filters: {
+    award: function(value) {
+      switch (value) {
+        case 1:
+          return "特种刊物论文";
+          break;
+        case 2:
+          return "权威核心刊物论文";
+          break;
+        case 3:
+          return "重要核心刊物论文";
+          break;
+        case 4:
+          return "一般核心刊物论文";
+          break;
+        case 5:
+          return "一般公开刊物论文";
+          break;
+        default:
+          return "受限公开刊物论文";
+      }
+    }
   }
-  
 };
 </script>
 <style scoped>

@@ -6,26 +6,6 @@
 
         <div class="add" @click="add_stu">新增</div>
       </h4>
-      <!-- <table>
-                <tr>
-                    <th>开始时间</th>
-                    <th>截止时间</th>
-                    <th>项目级别（规模）</th>
-                    <th>业绩名称（如项目，专利，标准，课题等）</th>
-                    <th>操作</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    
-                    <td>
-                        <div class="edit">编辑</div>
-                        <div class="del">删除</div>
-                    </td>
-                </tr>
-            </table> -->
 
       <el-table :data="formdata.ag_06.list" style="width: 100%">
         <el-table-column prop="startTime" label="开始时间" width="180">
@@ -33,7 +13,21 @@
         <el-table-column prop="endTime" label="截止时间"> </el-table-column>
         <el-table-column prop="level" label="项目级别"> </el-table-column>
         <el-table-column prop="name" label="业绩名称"> </el-table-column>
-
+        <el-table-column prop="dataUrl" label="项目材料扫描件"> 
+          <template slot-scope="scope">
+            <el-image style="width: 100px; height: 100px" :src="scope.row.dataUrl"></el-image>
+          </template>
+        </el-table-column>
+        <el-table-column prop="appointmentUrl" label="个人项目任职证明扫描件"> 
+          <template slot-scope="scope">
+            <el-image style="width: 100px; height: 100px" :src="scope.row.appointmentUrl"></el-image>
+          </template>
+        </el-table-column>
+        <el-table-column prop="awardUrl" label="项目获奖扫描件"> 
+          <template slot-scope="scope">
+            <el-image style="width: 100px; height: 100px" :src="scope.row.awardUrl"></el-image>
+          </template>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -47,141 +41,7 @@
       </el-table>
     </div>
     <div class="mask" ref="mask" @click="cancel_add"></div>
-    <!-- <div class="add_stu scroll" ref="add_stu">
-      <table>
-        <tr>
-          <th>新增业绩成果</th>
 
-          <th colspan="2">
-            <div @click="cancel_add">取消</div>
-          </th>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <span>*</span>
-            业绩名称（如项目，专利，标准，课题等）
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <input type="text" style="width:93.5%" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>*</span>
-            开始时间
-          </td>
-          <td>
-            <span>*</span>
-            截止时间
-          </td>
-          <td>
-            <span>*</span>
-            项目级别（规模）
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="text" />
-          </td>
-          <td>
-            <input type="text" />
-          </td>
-          <td>
-            <input type="text" />
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <span>*</span>
-            项目内容（最多70字）
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-              style="resize: vertical"
-            ></textarea>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <span>*</span>
-            本人起何作用（独立、主持、主要参加、参加或协助）（最多150字）
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-              style="resize: vertical"
-            ></textarea>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <span>*</span>
-            完成情况及效果、效益、获何种奖励、专利（最多250字）
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-              style="resize: vertical"
-            ></textarea>
-          </td>
-        </tr>
-
-        <tr>
-          <td colspan="3">项目材料扫描件（限20张）</td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <div class="npg">
-              <img src="" alt="" />
-              <input type="file" style="display:none" />
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">个人项目任职证明扫描件（限20张）</td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <div class="npg">
-              <img src="" alt="" />
-              <input type="file" style="display:none" />
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">项目获奖扫描件（限20张）</td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <div class="npg">
-              <img src="" alt="" />
-              <input type="file" style="display:none" />
-            </div>
-          </td>
-        </tr>
-      </table>
-
-      <div class="confirme">确认</div>
-      <div class="cancel" @click="cancel_add">取消</div>
-    </div> -->
     <el-dialog title="新增业绩成果" :visible.sync="visible" width="45%">
       <el-form :model="form" label-position="right" label-width="75px">
         <el-form-item label="开始时间">
@@ -211,10 +71,43 @@
           ></el-input>
         </el-form-item>
         <el-form-item label="业绩内容">
-          <el-input v-model="achievement.content" placeholder="业绩内容"></el-input>
+          <el-input v-model="achievement.content" type="textarea" placeholder="业绩内容"></el-input>
         </el-form-item>
         <el-form-item label="作用">
-          <el-input v-model="achievement.effect" placeholder="作用"></el-input>
+          <el-input v-model="achievement.effect" type="textarea" placeholder="作用"></el-input>
+        </el-form-item>
+        <el-form-item label="项目材料扫描件">
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="个人项目任职证明扫描件">
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess1"
+          >
+            <img v-if="imageUrl1" :src="imageUrl1" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="项目获奖扫描件">
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8486/system/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess2"
+          >
+            <img v-if="imageUrl2" :src="imageUrl2" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -242,8 +135,14 @@ export default {
               level: '',
               content: '',
               situation: '',
-              effect: ''
+              effect: '',
+              dataUrl: '',
+              appointmentUrl: '',
+              awardUrl: ''
           },
+          imageUrl: '',
+          imageUrl1: '',
+          imageUrl2: '',
           visible: false
       }
   },
@@ -265,6 +164,24 @@ export default {
     },
     add_stu: function() {
       this.visible = true;
+    },
+    handleAvatarSuccess(res) {
+      if (res.code == 0) {
+        this.imageUrl = "http://localhost:8486/show/" + res.data.path;
+        this.achievement.dataUrl = "http://localhost:8486/show/" + res.data.path;
+      }
+    },
+    handleAvatarSuccess1(res) {
+      if (res.code == 0) {
+        this.imageUrl1 = "http://localhost:8486/show/" + res.data.path;
+        this.achievement.appointmentUrl = "http://localhost:8486/show/" + res.data.path;
+      }
+    },
+    handleAvatarSuccess2(res) {
+      if (res.code == 0) {
+        this.imageUrl2 = "http://localhost:8486/show/" + res.data.path;
+        this.achievement.awardUrl = "http://localhost:8486/show/" + res.data.path;
+      }
     },
     async handleSubmit() {
       const res = await api.add(this.evaluation_id, this.achievement);

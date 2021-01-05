@@ -90,6 +90,7 @@ export default {
                    posTime: '',
                    frontUrl: '',
                    reverseUrl: '',
+                   image: '',
                    jury: '',
                    unitLevel: ''
                 },
