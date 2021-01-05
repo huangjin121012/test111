@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="text">
+                                <input v-model="formdata.ag_01.name" type="text">
                             </td>
                             <td>
                                 <input type="text">
@@ -276,7 +276,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="btn">保存</div>
+                <div @click="test" class="btn">保存</div>
             </form>
         </div>
     </div>
@@ -285,8 +285,21 @@
 <script>
 export default {
     name:'ag_step01',
+     props:{
+       formdata: Object
+    },
     data() {
-        
+        return {}
+    } ,
+
+    created(){
+        // console.log(this.formdata);
+    },
+    methods:{
+        test(){
+            console.log(111);
+            this.$emit("printf","sada")
+        }
     }
 }
 </script>

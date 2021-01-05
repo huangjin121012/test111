@@ -29,7 +29,7 @@
                     </td>
                 </tr>
             </table>
-            
+  
         </div>
         <div class="save">保存</div>
         <div class="mask" ref="mask" @click="cancel_add"></div>
@@ -119,6 +119,9 @@
 <script>
 export default {
     name:'ag_step03',
+         props:{
+       formdata: Object
+    },
     methods:{
         ban_scoall:function(){
             let body = document.querySelector('body');

@@ -91,14 +91,13 @@ export default {
     },
      created: function() {
     var aData = new Date();
-    console.log(aData) 
-    
+
     this.value =
       aData.getFullYear() + "-" + (aData.getMonth() + 1) + "-" + aData.getDate();
-    console.log(this.value) 
+
     this.time = this.value;
     this.year =  aData.getFullYear();
-    console.log(this.time);
+
   },
     data:function(){
         return{

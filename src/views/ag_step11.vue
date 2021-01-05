@@ -1,13 +1,16 @@
 <template>
     <div class="ag_step11">
         <h3>工作总结</h3>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <textarea  v-model="formdata.ag_01.name"  name="" id="" cols="30" rows="10"></textarea>
         <div class="btn">保存</div>
     </div>
 </template>
 <script>
 export default {
-    name:'ag_step11'
+    name:'ag_step11',
+         props:{
+       formdata: Object
+    },
 }
 </script>
 <style scoped>

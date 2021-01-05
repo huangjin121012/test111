@@ -9,7 +9,7 @@
             </div>
             
             <div class="right">
-                <component :is="currentpage"></component>
+                <component :is="currentpage" :formdata="formdata" @printf="printfData"  ></component>
             </div>
         </div>
     </div>
@@ -71,7 +71,45 @@ export default {
     },
     data:function(){
         return{
-            currentpage:'Promise'
+            currentpage:'Promise' ,
+            formdata : {
+                ag_01:{
+                   name:"1"
+                },
+                 ag_02:{
+                   list:[]
+                },
+                 ag_03:{
+                   
+                },
+                 ag_04:{
+                   
+                },
+                 ag_05:{
+                   
+                },
+                 ag_06:{
+                   
+                },
+                 ag_07:{
+                   
+                },
+                 ag_08:{
+                   
+                },
+                 ag_09:{
+                   
+                },
+                 ag_10:{
+                   
+                },
+                 ag_11:{
+                   
+                },
+                 ag_12:{
+                   
+                }
+            }
         }
     },
     methods:{
@@ -82,7 +120,6 @@ export default {
             }else{
                 // nothing
             }
-            // console.log(data.toString());
             if(data.toString() == '00'){
                 this.currentpage = 'Promise';
                 return;
@@ -92,8 +129,10 @@ export default {
                 return;
             }
             this.currentpage = "Ag_step"+data;
-             console.log(data);
-            // this.currentpage
+        } ,
+        printfData(data){
+               console.log(2222)
+            console.log(data)
         }
     }
     

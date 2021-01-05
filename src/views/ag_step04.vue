@@ -59,6 +59,9 @@
 <script>
 export default {
     name:'ag_step04',
+         props:{
+       formdata: Object
+    },
     methods:{
         ban_scoall:function(){
             let body = document.querySelector('body');
