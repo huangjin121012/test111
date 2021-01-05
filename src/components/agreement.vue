@@ -74,7 +74,24 @@ export default {
             currentpage:'Promise' ,
             formdata : {
                 ag_01:{
-                   
+                   person_name: '', 
+                   idcard: '',
+                   phone: '',
+                   email: '',
+                   nation: '',
+                   political: '',
+                   birthDay: '',
+                   filePlace: '',
+                   property: '',
+                   workTime: '',
+                   skillAge: '',
+                   oldname: '',
+                   position: '',
+                   posTime: '',
+                   frontUrl: '',
+                   reverseUrl: '',
+                   jury: '',
+                   unitLevel: ''
                 },
                  ag_02:{
                    list:[]
@@ -83,13 +100,13 @@ export default {
                    
                 },
                  ag_04:{
-                   
+                   list:[]
                 },
                  ag_05:{
-                   
+                   list:[]
                 },
                  ag_06:{
-                   
+                   list:[]
                 },
                  ag_07:{
                    
@@ -101,7 +118,7 @@ export default {
                    
                 },
                  ag_10:{
-                   
+                   list:[]
                 },
                  ag_11:{
                    
