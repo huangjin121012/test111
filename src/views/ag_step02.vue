@@ -2,7 +2,7 @@
   <div class="ag_stpe02">
     <div class="education">
       <h4>
-        学历情况新增
+        学历情况
         <div class="add" @click="add_edu">新增</div>
       </h4>
       <el-table :data="formdata.ag_02.list" style="width: 100%">
@@ -16,6 +16,11 @@
         <el-table-column prop="profession" label="专业"> </el-table-column>
         <el-table-column prop="certificateNumber" label="毕业证编号">
         </el-table-column>
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button @click="handleDelete(scope.row.id)" type="text" size="small">删除</el-button>
+                </template>
+              </el-table-column>
       </el-table>
     </div>
     <el-dialog
@@ -62,6 +67,7 @@
 </template>
 <script>
 import * as api from "../api/study";
+import { Message } from 'element-ui'
 export default {
   name: "ag_step02",
   props: {
@@ -70,6 +76,7 @@ export default {
   data() {
     return {
       form: {},
+      evaluation_id: -1,
       study: {
         graduationTime: "",
         project: "",
@@ -92,7 +99,6 @@ export default {
       body.style.overflow = "auto";
     },
     cancel_add: function () {
-      // alert(1);
       this.$refs.mask.style.display = "none";
       this.$refs.add_stu.style.display = "none";
 
@@ -102,25 +108,49 @@ export default {
       this.educationDialogVisible = true;
     },
     async handleSubmit() {
-      const res = await api.add(1, this.study);
+      const res = await api.add(this.evaluation_id, this.study);
+    
       if (res.code == 0) {
         Message({
           message: "添加成功",
           type: "success",
           duration: 2 * 1000,
         });
+        this.study = {
+        graduationTime: "",
+        project: "",
+        level: "",
+        quality: "",
+        school: "",
+        profession: "",
+        certificateNumber: "",
+      }
+      this.educationDialogVisible = false
+        this.requestData()
       }
     },
     async requestData() {
-      const res = await api.list(1);
-      console.log(res);
+      const res = await api.list(this.evaluation_id);
       if (res.code == 0) {
         this.formdata.ag_02.list = res.data;
       }
     },
+    async handleDelete(id) {
+      const res = await api.deleteById(this.evaluation_id,id);
+      if (res.code == 0) {
+            Message({
+          message: "删除成功",
+          type: "success",
+          duration: 2 * 1000,
+        })
+          this.requestData()
+      }
+    },
   },
   created() {
+       this.evaluation_id = localStorage.getItem("evaluation_id")
     this.requestData();
+     
   },
 };
 </script>

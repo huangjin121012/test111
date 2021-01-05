@@ -48,29 +48,7 @@
           </tr>
         </table>
       </div>
-      <!-- <div class="start_btn" ref="start_btn">
-            <h3>选择评审会</h3>
-            <h4>申报年度：2020</h4>
-            <div class="slect_start" ref="slect_start" >
-                <span class="start1 " ref="start1" @click="changeLevel('',$event,1)" :class="{'slect_start_active':1==current}"></span>
-                <span class="start2" ref="start2" @click="changeLevel('中级',$event,2)" :class="{'slect_start_active':2==current}">中级</span>
-                <span class="start3" ref="start3" @click="changeLevel('副高级',$event,3)" :class="{'slect_start_active':3==current}">副高级</span>
-            </div>
-            <div class="input_pace">
-                <span>申报系列：</span>
-                <input type="text" class="office" v-model="msg">
-            </div>
-            <div class="input_pace">
-                <span>申报评审会：</span>
-                <input type="text" class="office" v-model="office">
-            </div>
-            
-            <div class="chose">
-                <router-link to="agreement"><div class="confirm" @click="over">确认</div></router-link>
-                
-                <div class="cancel"  @click="over">取消</div>
-            </div>
-        </div> -->
+
 
       <div class="mask" ref="mask"></div>
     </div>
@@ -82,35 +60,35 @@
       <!-- <h4>申报年度：2020</h4>  :model="form"-->
       <el-form label-position="right" label-width="125px">
         <el-form-item label="申报等级">
-          <el-radio-group v-model="radio1" style="width:100%">
-            <el-radio-button label="初级"></el-radio-button>
-            <el-radio-button label="中级"></el-radio-button>
-            <el-radio-button label="副高级"></el-radio-button>
+          <el-radio-group v-model="form.level" style="width:100%">
+            <el-radio-button label="初级" ></el-radio-button>
+            <el-radio-button label="中级" ></el-radio-button>
+            <el-radio-button label="副高级" ></el-radio-button>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="申报系列">
           <el-select
-            v-model="value"
+            v-model="form.source"
             @change="selectChanged"
             style="width:100%"
-            placeholder="请选择"
+            placeholder="请选择申报系列"
           >
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item.label"
             >
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="申报评审会">
-          <el-select v-model="value1" style="width:100%" placeholder="请选择">
+          <el-select v-model="form.jury" style="width:100%" placeholder="请选择申报评审会">
             <el-option
               v-for="item in options1"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item.label"
             >
             </el-option>
           </el-select>
@@ -118,7 +96,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="educationDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="educationDialogVisible = false"
+        <el-button type="primary" @click="handleSubmit"
           >确 定</el-button
         >
       </div>
@@ -128,6 +106,8 @@
 
 <script>
 import Menu from "../views/menu";
+import * as api from "../api/evaluation";
+import { Message } from 'element-ui'
 export default {
   name: "company_evaluation",
   components: {
@@ -135,7 +115,6 @@ export default {
   },
   data: function() {
     return {
-      radio1: "",
       educationDialogVisible: false,
       msg: "",
       office: "",
@@ -144,7 +123,11 @@ export default {
       year: "",
       current: 1,
       progress: "25%", //进度
-
+      form:{
+         level:"初级",
+         jury:"",
+         source:"",
+      },
       options: [
         {
           value: "1",
@@ -174,8 +157,7 @@ export default {
   },
   methods: {
     selectChanged(value) {
-      console.log(value);
-      if (value == 1) {
+      if (value == "播音系列") {
         this.options1 = [
           {
             value1: "1",
@@ -188,7 +170,7 @@ export default {
               "桂林市播音系列评审会【桂林市新闻社科系列职称改革工作领导小组】"
           }
         ];
-      } else if (value == 2) {
+      } else if (value == "档案系列") {
         this.options1 = [
           {
             value1: "1",
@@ -206,7 +188,7 @@ export default {
               "桂林市档案系列职称评委会【桂林市档案系列职称改革工作领导小组】"
           }
         ];
-      } else if (value == 3) {
+      } else if (value == "翻译系列") {
         this.options1 = [
           {
             value1: "1",
@@ -214,7 +196,7 @@ export default {
               "自治区翻译系列评委会【广西壮族自治区翻译系列职称改革工作领导小组办公室】"
           }
         ];
-      } else if (value == 4) {
+      } else if (value == "高等学校教师系列") {
         this.options1 = [
           {
             value1: "1",
@@ -232,7 +214,7 @@ export default {
               "高等学校教师系列桂林理工大学评委会【桂林理工大学职称改革工作领导小组办公室】"
           },
         ];
-      } else if (value == 5) {
+      } else if (value == "工程系列") {
         this.options1 = [
           {
             value1: "1",
@@ -251,6 +233,24 @@ export default {
           },
         ];
       }
+    },
+   async handleSubmit(){
+     let level = this.form.level
+     let form = this.form
+     if(level=="初级") level = 0
+     else if(level == "中级") level = 1
+     else level = 2
+     const res =  await api.add({
+        level:level,
+        jury:form.jury,
+        source:form.source,
+        userId:localStorage.getItem("user_id")
+     })
+     if(res.code == 0){
+       localStorage.setItem("evaluation_id",res.data.id)
+       this.$router.push("agreement")
+     }
+     console.log(res)
     }
   }
 };

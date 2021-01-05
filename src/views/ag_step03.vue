@@ -2,125 +2,79 @@
     <div class="ag_stpe03 ">
         <div class="education">
             <h4>
-               学历情况新增
+               主要经历
               
                <div class="add" @click="add_stu">新增</div> 
             </h4>
-            <table>
-                <tr>
-                    <th>开始时间</th>
-                    <th>截止时间</th>
-                    <th>工作单位(学校)</th>
-                    <th>从事何种专业技术工作（学习）</th>
-                    <th>任何职</th>
-                    <th>证明人</th>
-                    <th>操作</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <div class="edit">编辑</div>
-                        <div class="del">删除</div>
-                    </td>
-                </tr>
-            </table>
-  
-        </div>
-        <div class="save">保存</div>
-        <div class="mask" ref="mask" @click="cancel_add"></div>
-        <div class="add_stu" ref="add_stu">
 
-            <table>
-                <tr>
-                    <th>新增主要经历</th>
-                    <th>
-                        <div @click="cancel_add">取消</div>
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <span>*</span>
-                        开始时间
-                    </td>
-                    <td>
-                        <span>*</span>
-                        何地,何学校,何单位学习或从事何种专业技术工作
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>*</span>
-                        截止时间
-                    </td>
-                    <td>
-                        <span>*</span>
-                        任何职
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>*</span>
-                        工作单位
-                    </td>
-                    <td>
-                        <span>*</span>
-                        证明人
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td colspan="2"> 辅助证明材料</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div class="npg">
-                            <img src="" alt="">
-                            <input type="file" style="display:none">
-                        </div>
-                        
-                    </td>
-                </tr>
-
-            </table>
-            <div class="confirme" >确认</div>
-            <div class="cancel" @click="cancel_add">取消</div>
-        </div>
+      <el-table :data="formdata.ag_02.list" style="width: 100%">
+        <el-table-column prop="deadline" label="截止时间" width="180">
+        </el-table-column>
+        <el-table-column prop="unit" label="工作单位(学校)"> </el-table-column>
+        <el-table-column prop="event" label="从事何种专业技术工作（学习）"> </el-table-column>
+        <el-table-column prop="position" label="职位"> </el-table-column>
+        <el-table-column prop="witness" label="证明人"> </el-table-column>
+    
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button @click="handleDelete(scope.row.id)" type="text" size="small">删除</el-button>
+                </template>
+              </el-table-column>
+      </el-table>
+    </div>
+    <el-dialog
+      title="新增学历"
+      :visible.sync="visible"
+      width="45%"
+    >
+      <el-form :model="form" label-position="right" label-width="75px">
+        <el-form-item label="截止时间">
+          <el-date-picker
+            v-model="study.deadline"
+            type="date"
+            placeholder="截止时间"
+          ></el-date-picker>
+        </el-form-item>
+        <el-form-item label="工作单位(学校)">
+          <el-input v-model="study.unit" placeholder="工作单位(学校)"></el-input>
+        </el-form-item>
+        <el-form-item label="从事工作（学习）">
+          <el-input v-model="study.event" placeholder="从事何种专业技术工作（学习）"></el-input>
+        </el-form-item>
+        <el-form-item label="职位">
+          <el-input v-model="study.position" placeholder="职位"></el-input>
+        </el-form-item>
+        <el-form-item label="证明人">
+          <el-input v-model="study.witness" placeholder="证明人"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="visible = false">取 消</el-button>
+        <el-button type="primary" @click="handleSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
     </div>
 </template>
 <script>
+import * as api from "../api/study";
+import { Message } from 'element-ui'
 export default {
     name:'ag_step03',
          props:{
        formdata: Object
+    },
+    data(){
+        return {
+            form:{},
+               study: {
+        deadline: "",
+        unit: "",
+        event: "",
+        position: "",
+        witness: "",
+      },
+            visible:false
+        }
     },
     methods:{
         ban_scoall:function(){
@@ -139,13 +93,54 @@ export default {
             this.start_scoall();
         },
         add_stu:function(){
-            this.ban_scoall();
-            this.$refs.mask.style.display = 'block';
-            this.$refs.add_stu.style.display = 'block';
+            this.visible = true
             
-        }
+        } ,
+           async handleSubmit() {
+      const res = await api.add(this.evaluation_id, this.study);
+    
+      if (res.code == 0) {
+        Message({
+          message: "添加成功",
+          type: "success",
+          duration: 2 * 1000,
+        });
+        this.study = {
+        graduationTime: "",
+        project: "",
+        level: "",
+        quality: "",
+        school: "",
+        profession: "",
+        certificateNumber: "",
+      }
+      this.visible = false
+        this.requestData()
+      }
+    },
+    async requestData() {
+      const res = await api.list(this.evaluation_id);
+      if (res.code == 0) {
+        this.formdata.ag_02.list = res.data;
+      }
+    },
+    async handleDelete(id) {
+      const res = await api.deleteById(this.evaluation_id,id);
+      if (res.code == 0) {
+            Message({
+          message: "删除成功",
+          type: "success",
+          duration: 2 * 1000,
+        })
+          this.requestData()
+      }
+    },
         
-    }
+    } 
+    ,created() {
+    this.evaluation_id = localStorage.getItem("evaluation_id")
+    this.requestData(); 
+  },
 }
 </script>
 <style scoped>

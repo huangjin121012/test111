@@ -124,22 +124,12 @@ export default {
         //  1.保存token，用户信息
           localStorage.setItem("msm-user", JSON.stringify(resp));
           localStorage.setItem("msm-token", resp.token);
-            // window.sessionStorage.setItem('token', res.data.token)
+
             console.log(res)
             if (res.code === 0) {
+                localStorage.setItem("user_id", resp.id);
               this.loginSuccess()
             } 
-            // else {
-            //   this.msg = res.data.msg
-            //   this.$message({
-            //     message: this.msg,
-            //     type: 'error',
-            //     duration: 1500,
-            //     onClose: () => {
-            //       this.visible = false
-            //     }
-            //   })
-            // }
           })
             .catch(() => {
               this.loading = false
