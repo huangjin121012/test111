@@ -56,7 +56,9 @@ export default {
     },    data(){
         return {
             form:{},
-            study: {},
+            study: {
+                projectUrl:''
+            },
              imageUrl: '',
             visible:false
         }
@@ -115,9 +117,9 @@ export default {
     handleAvatarSuccess(res){
         if(res.code==0){
              this.imageUrl = "http://localhost:8486/show/" + res.data.path
-        
+             this.form.projectUrl = "http://localhost:8486/show/" + res.data.path
         }
-               console.log(res)
+       
         }
         
     } 
