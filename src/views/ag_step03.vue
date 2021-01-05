@@ -7,7 +7,7 @@
         <div class="add" @click="add_stu">新增</div>
       </h4>
 
-      <el-table :data="formdata.ag_02.list" style="width: 100%">
+      <el-table :data="formdata.ag_03.list" style="width: 100%">
         <el-table-column prop="deadline" label="截止时间" width="180">
         </el-table-column>
         <el-table-column prop="unit" label="工作单位(学校)"> </el-table-column>
@@ -28,7 +28,12 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog title="新增学历" :visible.sync="visible" width="45%">
+
+    <el-dialog
+      title="新增经历"
+      :visible.sync="visible"
+      width="45%"
+    >
       <el-form :model="form" label-position="right" label-width="75px">
         <el-form-item label="截止时间">
           <el-date-picker
@@ -64,8 +69,10 @@
   </div>
 </template>
 <script>
-import * as api from "../api/study";
-import { Message } from "element-ui";
+
+import * as api from "../api/experience";
+import { Message } from 'element-ui'
+
 export default {
   name: "ag_step03",
   props: {
@@ -128,7 +135,7 @@ export default {
     async requestData() {
       const res = await api.list(this.evaluation_id);
       if (res.code == 0) {
-        this.formdata.ag_02.list = res.data;
+        this.formdata.ag_03.list = res.data;
       }
     },
     async handleDelete(id) {

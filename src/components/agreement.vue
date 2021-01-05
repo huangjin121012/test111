@@ -97,7 +97,7 @@ export default {
                    list:[]
                 },
                  ag_03:{
-                   
+                     list:[]
                 },
                  ag_04:{
                    list:[]
@@ -109,13 +109,13 @@ export default {
                    list:[]
                 },
                  ag_07:{
-                   
+                     list:[]
                 },
                  ag_08:{
-                   
+                     list:[]
                 },
                  ag_09:{
-                   
+                     list:[]
                 },
                  ag_10:{
                    list:[]
@@ -124,7 +124,7 @@ export default {
                    
                 },
                  ag_12:{
-                   
+                   list:[]
                 }
             }
         }

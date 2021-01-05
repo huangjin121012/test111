@@ -250,7 +250,6 @@ export default {
        localStorage.setItem("evaluation_id",res.data.id)
        this.$router.push("agreement")
      }
-     console.log(res)
     }
   }
 };

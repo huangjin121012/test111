@@ -4,139 +4,184 @@
             <h4>
                业绩奖项
               
-               <div class="add" @click="add_stu">新增</div> 
+               <div class="add" @click="add_edu">新增</div> 
             </h4>
-            <table>
-                <tr>
-                    <th>项目名称</th>
-                    <th>奖励等级</th>
-                    <th>授予时间</th>
-                    <th>授予机构</th>
-                    <th>操作</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <div class="edit">编辑</div>
-                        <div class="del">删除</div>
-                    </td>
-                </tr>
-            </table>
-            
+        <el-table :data="formdata.ag_07.list" style="width: 100%">
+        <el-table-column prop="name" label="项目名称" width="180">
+        </el-table-column>
+        <el-table-column prop="level" label="奖励等级" width="180">
+            <template slot-scope="scope">
+           {{ scope.row.level | award }}
+              </template>
+        </el-table-column>
+        <el-table-column prop="agrantTime" label="授予时间"> </el-table-column>
+        <el-table-column prop="awardAgrent" label="授予机构"> </el-table-column>
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button @click="handleDelete(scope.row.id)" type="text" size="small">删除</el-button>
+                </template>
+              </el-table-column>
+      </el-table>
         </div>
-        <div class="save">保存</div>
-        <div class="mask" ref="mask" @click="cancel_add"></div>
-        <div class="add_stu scroll" ref="add_stu">
 
-            <table>
-                <tr>
-                    <th>新增业绩奖项</th>
-                    <th>
-                        <div @click="cancel_add">取消</div>
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <span>*</span>
-                        项目名称
-                    </td>
-                    <td>
-                        <span>*</span>
-                       奖励等级
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>*</span>
-                        授予时间
-                    </td>
-                    <td>
-                        <span>*</span>
-                        授予机构
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <span>*</span>
-                        内容提要
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <textarea name="" id="" cols="30" rows="10" style="resize: vertical"></textarea>
-                    </td>
-                    
-                </tr>
-               
-                <tr>
-                    <td colspan="2"> 辅助证明材料</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div class="npg">
-                            <img src="" alt="">
-                            <input type="file" style="display:none">
-                        </div>
-                        
-                    </td>
-                </tr>
-                
-
-            </table>
-            <div class="confirme">确认</div>
-            <div class="cancel" @click="cancel_add">取消</div>
-        </div>
+        <el-dialog
+      title="新增业绩奖项"
+      :visible.sync="educationDialogVisible"
+      width="45%"
+    >
+      <el-form :model="form" label-position="right" label-width="75px">
+        <el-form-item label="授予时间">
+          <el-date-picker
+            v-model="study.agrantTime"
+            type="date"
+            placeholder="授予时间"
+          ></el-date-picker>
+        </el-form-item>
+        <el-form-item label="项目名称">
+          <el-input v-model="study.name" placeholder="项目名称"></el-input>
+        </el-form-item>
+        <el-form-item label="奖励等级">
+          <el-select v-model="study.level" placeholder="奖励等级">
+                <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="授予机构">
+          <el-input v-model="study.awardAgrent" placeholder="授予机构"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="educationDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
     </div>
 </template>
 <script>
+import * as api from "../api/award";
+import { Message } from 'element-ui'
 export default {
     name:'ag_step07',
          props:{
        formdata: Object
     },
-    methods:{
-        ban_scoall:function(){
-            let body = document.querySelector('body');
-            body.style.overflow='hidden';
+     data() {
+    return {
+      form: {},
+      evaluation_id: -1,
+      study: {
+        name: "",
+        agrantTime: "",
+        level: "",
+        awardAgrent: "",
+      },
+          options: [
+        {
+          value: "1",
+          label: "国家级"
         },
-        start_scoall:function(){
-            let body = document.querySelector('body');
-            body.style.overflow='auto';
+        {
+          value: "2",
+          label: "省部级"
         },
-        cancel_add:function(){
-            // alert(1);
-            this.$refs.mask.style.display = 'none';
-            this.$refs.add_stu.style.display = 'none';
-            
-            this.start_scoall();
+        {
+          value: "3",
+          label: "市厅级"
         },
-        add_stu:function(){
-            this.ban_scoall();
-            this.$refs.mask.style.display = 'block';
-            this.$refs.add_stu.style.display = 'block';
-            
-        } 
-    }
+        {
+          value: "4",
+          label: "县区级"
+        },
+        {
+          value: "5",
+          label: "单位级"
+        }, {
+          value: "0",
+          label: "其他"
+        },
+      ],
+      educationDialogVisible: false,
+    };
+  },
+      methods: {
+    ban_scoall: function () {
+      let body = document.querySelector("body");
+      body.style.overflow = "hidden";
+    },
+    start_scoall: function () {
+      let body = document.querySelector("body");
+      body.style.overflow = "auto";
+    },
+    cancel_add: function () {
+
+
+      this.start_scoall();
+    },
+    add_edu: function () {
+      this.educationDialogVisible = true;
+    },
+    async handleSubmit() {
+      const res = await api.add(this.evaluation_id, this.study);
+    
+      if (res.code == 0) {
+        Message({
+          message: "添加成功",
+          type: "success",
+          duration: 2 * 1000,
+        });
+        this.study = {
+        graduationTime: "",
+        project: "",
+        level: "",
+        quality: "",
+        school: "",
+        profession: "",
+        certificateNumber: "",
+      }
+      this.educationDialogVisible = false
+        this.requestData()
+      }
+    },
+    async requestData() {
+      const res = await api.list(this.evaluation_id);
+      if (res.code == 0) {
+        this.formdata.ag_07.list = res.data;
+      }
+    },
+    async handleDelete(id) {
+      const res = await api.deleteById(this.evaluation_id,id);
+      if (res.code == 0) {
+            Message({
+          message: "删除成功",
+          type: "success",
+          duration: 2 * 1000,
+        })
+          this.requestData()
+      }
+    },
+  },
+  created() {
+       this.evaluation_id = localStorage.getItem("evaluation_id")
+    this.requestData();
+     
+  },filters: {
+  award: function (value) {
+      switch(value){
+          case 1: return "国家级";break;
+          case 2: return "省部级";break;
+          case 3: return "市厅级";break;
+          case 4: return "县区级";break;
+          case 5: return "单位级";break;
+          default: return "其他" ;
+       
+      }
+  }
+}
 }
 </script>
 <style scoped>
