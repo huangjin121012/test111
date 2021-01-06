@@ -92,7 +92,8 @@ export default {
                    reverseUrl: '',
                    image: '',
                    jury: '',
-                   unitLevel: ''
+                   unitLevel: '',
+                   summarize: ''
                 },
                  ag_02:{
                    list:[]
