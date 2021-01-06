@@ -130,10 +130,12 @@ export default {
       year: "",
       current: 1,
       progress: "25%", //进度
-      form: {
-        level: "初级",
-        jury: "",
-        source: ""
+      form:{
+         level:"初级",
+         jury:"",
+         source:"",
+         year:2021,
+         status:0
       },
       data: {},
       options: [
@@ -262,29 +264,25 @@ export default {
         ];
       }
     },
-    async handleSubmit() {
-      let level = this.form.level;
-      let form = this.form;
-      if (level == "初级") level = 0;
-      else if (level == "中级") level = 1;
-      else level = 2;
-      const res = await api.add({
-        level: level,
-        jury: form.jury,
-        source: form.source,
-        userId: localStorage.getItem("user_id")
-      });
-      if (res.code == 0) {
-        localStorage.setItem("evaluation_id", res.data.id);
-        this.$router.push("agreement");
-      }
-    },
-    async getData() {
-      const res = await api.list(-1);
-      if (res.code == 0) {
-        this.data = res.data.list
-        console.log(this.data);
-      }
+   async handleSubmit(){
+     let level = this.form.level
+     let form = this.form
+     if(level=="初级") level = 0
+     else if(level == "中级") level = 1
+     else level = 2
+     const res =  await api.add({
+        level:level,
+        jury:form.jury,
+        source:form.source,
+        userId:localStorage.getItem("user_id"),
+        status:0
+     })
+     if(res.code == 0){
+
+       localStorage.setItem("evaluation_id",res.data.id)
+         localStorage.setItem("op",0)
+       this.$router.push("agreement")
+     }
     }
   }
 };

@@ -3,7 +3,8 @@
     <div class="education">
       <h4>
         学历情况
-        <div class="add" @click="add_edu">新增</div>
+        <div v-if="op!=2&&op!=3"  class="add" @click="add_edu">新增</div>
+   
       </h4>
       <el-table :data="formdata.ag_02.list" style="width: 100%">
         <el-table-column prop="graduationTime" label="毕业时间" width="180">
@@ -103,6 +104,7 @@ export default {
         proveUrl: ''
       },
       imageUrl: '',
+      op:0,
       educationDialogVisible: false,
     };
   },
@@ -172,7 +174,9 @@ export default {
   },
   created() {
        this.evaluation_id = localStorage.getItem("evaluation_id")
-    this.requestData();
+        this.op = localStorage.getItem("op")
+       this.requestData();
+      
      
   },
 };

@@ -3,7 +3,7 @@
     <div class="education">
       <h4>
         从业或职（执）业资格
-        <div class="add" @click="add_stu">新增</div>
+        <div v-if="op!=2&&op!=3" class="add" @click="add_stu">新增</div>
       </h4>
       <el-table :data="formdata.ag_09.list" style="width: 100%">
         <el-table-column prop="name" label="资格名称" width="180">
@@ -98,6 +98,7 @@ export default {
         proveUrl: ""
       },
       imageUrl: "",
+      op:0 ,
       educationDialogVisible: false
     };
   },
@@ -159,7 +160,8 @@ export default {
     }
   },
   created() {
-    this.evaluation_id = localStorage.getItem("evaluation_id");
+    this.evaluation_id = localStorage.getItem("evaluation_id");  
+    this.op = localStorage.getItem("op")
     this.requestData();
   }
 };

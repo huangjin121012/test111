@@ -4,7 +4,7 @@
       <h4>
         主要经历
 
-        <div class="add" @click="add_stu">新增</div>
+        <div v-if="op!=2&&op!=3" class="add" @click="add_stu">新增</div>
       </h4>
 
       <el-table :data="formdata.ag_03.list" style="width: 100%">
@@ -104,6 +104,7 @@ export default {
         witness: "",
         proveUrl: ''
       },
+      op:0,
       imageUrl: '',
       visible: false
     };
@@ -175,6 +176,7 @@ export default {
   },
   created() {
     this.evaluation_id = localStorage.getItem("evaluation_id");
+            this.op = localStorage.getItem("op")
     this.requestData();
   }
 };

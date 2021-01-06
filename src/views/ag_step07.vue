@@ -4,7 +4,7 @@
       <h4>
         业绩奖项
 
-        <div class="add" @click="add_edu">新增</div>
+        <div v-if="op!=2&&op!=3" class="add" @click="add_edu">新增</div>
       </h4>
       <el-table :data="formdata.ag_07.list" style="width: 100%">
         <el-table-column prop="name" label="项目名称" width="180">
@@ -132,7 +132,8 @@ export default {
           label: "其他"
         }
       ],
-      educationDialogVisible: false
+      educationDialogVisible: false,
+      op:0
     };
   },
   methods: {
@@ -198,6 +199,7 @@ export default {
   },
   created() {
     this.evaluation_id = localStorage.getItem("evaluation_id");
+          this.op = localStorage.getItem("op")
     this.requestData();
   },
   filters: {

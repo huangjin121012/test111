@@ -3,7 +3,7 @@
     <div class="box">
       <h4>
         人才引进相关材料
-        <div class="add" @click="add_stu">新增</div>
+        <div v-if="op!=2&&op!=3" class="add" @click="add_stu">新增</div>
       </h4>
       <el-table :data="formdata.ag_04.list" style="width: 100%">
         <el-table-column prop="name" label="材料名称"></el-table-column>
@@ -72,6 +72,7 @@ export default {
         name: "",
         proveUrl: ""
       },
+      op:0,
       imageUrl: ''
     };
   },
@@ -137,6 +138,7 @@ export default {
   },
   created() {
     this.evaluation_id = localStorage.getItem("evaluation_id");
+            this.op = localStorage.getItem("op")
     this.requestData();
   }
 };

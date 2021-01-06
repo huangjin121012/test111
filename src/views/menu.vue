@@ -12,7 +12,7 @@
                 <ul class="item">
                     <router-link to="Evaluation"><li>职称认定</li></router-link>
                     <router-link to="comeva"><li>职称评审</li></router-link>
-                    
+                     <router-link to="corporate_info"><li>职称审核</li></router-link>
                 </ul>
                 
             </li>

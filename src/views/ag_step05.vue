@@ -3,7 +3,7 @@
     <div class="education">
       <h4>
         论文、著作
-        <div class="add" @click="add_stu">新增</div>
+        <div v-if="op!=2&&op!=3" class="add" @click="add_stu">新增</div>
       </h4>
       <el-table :data="formdata.ag_05.list" style="width: 100%">
         <el-table-column prop="publishTime" label="发表时间"> </el-table-column>
@@ -144,6 +144,7 @@ export default {
         catalogUrl: "",
         contentUrl: ""
       },
+      op:0,
       options: [
         {
           value: "1",
@@ -256,6 +257,7 @@ export default {
   },
   created() {
     this.evaluation_id = localStorage.getItem("evaluation_id");
+      this.op = localStorage.getItem("op")
     this.requestData();
   },
   filters: {

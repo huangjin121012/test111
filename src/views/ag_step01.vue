@@ -6,85 +6,94 @@
           <div></div>
         </div>
         <div class="table">
-
           <el-form :inline="true" label-width="100px">
             <el-card class="demo-form-inline">
               <!--  -->
               <el-form-item label="评审年度">
-                <el-input placeholder="评审年度"></el-input>
+                <el-input :disabled ="op==2||op==3" placeholder="评审年度"></el-input>
               </el-form-item>
               <!--  -->
               <el-form-item label="单位级别">
                 <el-input
                   v-model="formdata.ag_01.unitLevel"
+                  :disabled ="op==2||op==3"
                   placeholder="单位级别"
                 ></el-input>
               </el-form-item>
               <el-form-item label="姓名">
                 <el-input
                   v-model="formdata.ag_01.name"
+                  :disabled ="op==2||op==3"
                   placeholder="姓名"
                 ></el-input>
               </el-form-item>
               <el-form-item label="曾用名">
                 <el-input
                   v-model="formdata.ag_01.oldname"
+                  :disabled ="op==2||op==3"
                   placeholder="曾用名"
                 ></el-input>
               </el-form-item>
               <el-form-item label="身份证件号码">
                 <el-input
                   v-model="formdata.ag_01.idcard"
+                  :disabled ="op==2||op==3"
                   placeholder="身份证件号码"
                 ></el-input>
               </el-form-item>
               <el-form-item label="民族">
                 <el-input
                   v-model="formdata.ag_01.nation"
+                  :disabled ="op==2||op==3"
                   placeholder="民族"
                 ></el-input>
               </el-form-item>
               <el-form-item label="参加评审会">
                 <el-input
                   v-model="formdata.ag_01.jury"
+                  :disabled ="op==2||op==3"
                   placeholder="参加评审会"
                 ></el-input>
               </el-form-item>
               <!--  -->
               <el-form-item label="籍贯">
-                <el-input placeholder="籍贯"></el-input>
+                <el-input :disabled ="op==2||op==3" placeholder="籍贯"></el-input>
               </el-form-item>
               <!--  -->
               <el-form-item label="联系电话">
                 <el-input
                   v-model="formdata.ag_01.phone"
+                  :disabled ="op==2||op==3"
                   placeholder="联系电话"
                 ></el-input>
               </el-form-item>
               <!--  -->
               <el-form-item label="评审专业系列">
-                <el-input placeholder="评审专业系列"></el-input>
+                <el-input :disabled ="op==2||op==3" placeholder="评审专业系列"></el-input>
               </el-form-item>
               <!--  -->
               <el-form-item label="拟评专业">
-                <el-input placeholder="拟评专业"></el-input>
+                <el-input :disabled ="op==2||op==3" placeholder="拟评专业"></el-input>
               </el-form-item>
               <!--  -->
               <el-form-item label="政治面貌">
                 <el-input
                   v-model="formdata.ag_01.political"
+                  :disabled ="op==2||op==3"
                   placeholder="政治面貌"
                 ></el-input>
               </el-form-item>
               <el-form-item label="个人身份性质">
                 <el-input
                   v-model="formdata.ag_01.property"
+                  :disabled ="op==2||op==3"
                   placeholder="个人身份性质"
                 ></el-input>
               </el-form-item>
               <el-form-item label="出生年月">
                 <el-date-picker
                   v-model="formdata.ag_01.birthDay"
+                  :disabled ="op==2||op==3"
                   placeholder="出生年月"
                   style="width:205px"
                   type="month"
@@ -94,6 +103,7 @@
               <el-form-item label="填表时间">
                 <el-date-picker
                   placeholder="填表时间"
+                  :disabled ="op==2||op==3"
                   style="width:205px"
                 ></el-date-picker>
               </el-form-item>
@@ -101,6 +111,7 @@
               <el-form-item label="参加工作时间">
                 <el-date-picker
                   v-model="formdata.ag_01.workTime"
+                  :disabled ="op==2||op==3"
                   placeholder="参加工作时间"
                   style="width:205px"
                 ></el-date-picker>
@@ -108,37 +119,42 @@
               <el-form-item label="工作年限">
                 <el-input
                   v-model="formdata.ag_01.skillAge"
+                  :disabled ="op==2||op==3"
                   placeholder="工作年限"
                 ></el-input>
               </el-form-item>
               <el-form-item label="邮箱">
                 <el-input
                   v-model="formdata.ag_01.email"
+                  :disabled ="op==2||op==3"
                   placeholder="邮箱"
                 ></el-input>
               </el-form-item>
               <el-form-item label="档案所在机构">
                 <el-input
                   v-model="formdata.ag_01.filePlace"
+                  :disabled ="op==2||op==3"
                   placeholder="档案所在机构"
                 ></el-input>
               </el-form-item>
               <el-form-item label="行政职务">
                 <el-input
                   v-model="formdata.ag_01.position"
+                  :disabled ="op==2||op==3"
                   placeholder="行政职务"
                 ></el-input>
               </el-form-item>
               <el-form-item label="职务任命时间">
                 <el-date-picker
                   v-model="formdata.ag_01.posTime"
+                  :disabled ="op==2||op==3"
                   placeholder="行政职务任命时间"
                   style="width:205px"
                 ></el-date-picker>
               </el-form-item>
               <!--  -->
               <el-form-item label="联系地址">
-                <el-input placeholder="联系地址"></el-input>
+                <el-input :disabled ="op==2||op==3" placeholder="联系地址"></el-input>
               </el-form-item>
               <!--  -->
             </el-card>
@@ -151,6 +167,7 @@
                 <span>*</span>
                 身份证正面图片（限1张）
                 <el-upload
+                :disabled ="op==2||op==3"
                   style="margin-left: 40px;margin-top: 12px;"
                   class="avatar-uploader"
                   action="http://localhost:8486/system/upload"
@@ -167,6 +184,7 @@
                 <span>*</span>
                 身份证反面图片（限1张）
                 <el-upload
+                :disabled ="op==2||op==3"
                   style="margin-left: 40px;margin-top: 12px;"
                   class="avatar-uploader"
                   action="http://localhost:8486/system/upload"
@@ -183,6 +201,7 @@
                 <span>*</span>
                 手持身份证照片（限1张）
                 <el-upload
+                :disabled ="op==2||op==3"
                   style="margin-left: 40px;margin-top: 12px;"
                   class="avatar-uploader"
                   action="http://localhost:8486/system/upload"
@@ -196,7 +215,7 @@
             </li>
           </ul>
         </div>
-        <div @click="test" class="btn">保存</div>
+        <div v-if="op!=2&&op!=3" @click="save" class="btn">保存</div>
       </form>
     </div>
   </div>
@@ -212,16 +231,15 @@ export default {
     return {
           imageUrl: '',
           imageUrl1: '',
-          imageUrl2: ''
+          imageUrl2: '',
+      evaluation_id:-1,
+      op:0,
     };
   },
 
-  created() {
-    // console.log(this.formdata);
-  },
   methods: {
-    test() {
-      this.$emit("printf", "sada");
+    save() {
+        localStorage.setItem("evaluation_id_"+this.evaluation_id ,JSON.stringify(this.formdata.ag_01) );
     },
      handleAvatarSuccess(res) {
       if (res.code == 0) {
@@ -241,6 +259,10 @@ export default {
         this.formdata.ag_01.image = "http://localhost:8486/show/" + res.data.path;
       }
     },
+  },
+  created(){
+   this.evaluation_id = localStorage.getItem("evaluation_id")
+   this.op = localStorage.getItem("op")
   }
 };
 </script>

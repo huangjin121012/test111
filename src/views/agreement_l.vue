@@ -18,9 +18,7 @@ export default {
     data:function(){
         return{
            content:['个人承诺','1.基本信息','2.学历情况','3.主要经历','4.人才引进相关材料','5.论文、著作','6.业绩成果','7.业绩奖项','8.业绩专利','9.从业或执业（职业）资格','10.国外工作经验或研究材料','11.工作总结','12.其他材料','审核报送'],
-           num:0,
-           
-               
+           num:0,                       
         }
     },
     methods:{
@@ -38,6 +36,19 @@ export default {
          doSomething(index) {
           this.num = index;
         }
+    },
+    created(){
+         let op = localStorage.getItem("op")
+        if(this.content.length>=14){
+                 this.content.pop()
+        }     
+         if(op==0||op==1){     
+             this.content.push("审核报送")
+         }else if(op==2){
+             
+         }else{
+             this.content.push("审核")
+         }
     }
 }
 </script>

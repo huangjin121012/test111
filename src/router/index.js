@@ -11,6 +11,7 @@ import Step from '../components/step'
 import UserRegister1 from '../components/userRegister1'
 import Comeva from '../components/company_evaluation'
 import Agreement from '../components/agreement'
+import CorporateInfo from '../components/corporate_info'
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,10 @@ export default new Router({
             path: '/register',
             name: 'Register',
             component: Register,
+        }, {
+            path: '/corporate_info',
+            name: 'CorporateInfo',
+            component: CorporateInfo,
         }, {
             path: '/main',
             name: 'Main',

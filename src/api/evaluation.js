@@ -10,15 +10,16 @@ export function add( data) {
 
 export function deleteById(evaluation_id, id) {
   return Service({
-    url: `/evaluation/${evaluation_id}/achievement/delete/${id}`,
+    url: `/evaluation/${id}`,
     method: 'DELETE',
   })
 }
 
-export function updateById(evaluation_id, id) {
+export function updateById(id,data) {
   return Service({
-    url: `/evaluation/${evaluation_id}/achievement/${id}`,
-    method: 'PUT'
+    url: `/evaluation/${id}`,
+    method: 'PUT',
+    data
   })
 }
 

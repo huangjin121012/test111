@@ -149,8 +149,14 @@ export default {
             this.currentpage = "Ag_step"+data;
         } ,
         printfData(data){
-               console.log(2222)
-            console.log(data)
+            
+        }
+    },
+    created(){
+        if(localStorage.getItem("op")>0){
+            console.log(111);
+            this.formdata.ag_01 =JSON.parse(localStorage.getItem("evaluation_id_"+localStorage.getItem("evaluation_id")))
+            console.log(this.formdata)
         }
     }
     
