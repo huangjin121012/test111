@@ -26,13 +26,25 @@
             以上政策均可在广西壮族自治区人力资源和社会保障厅网站上“年度职称评审工作专题”查询到；如网站查询不到或对政策文件把握不准，您也可根据我们在该网站提供的联系方式选择到您申报的评委会咨询了解。
           </div>
         </el-card>
-        <br />      
-        <el-card class="box-card"  v-for="(item) in data" :key="item.id" :offset="1" style="margin-top:15px">
+        <br />
+        <el-card
+          class="box-card"
+          v-for="item in data"
+          :key="item.id"
+          :offset="1"
+          style="margin-top:15px"
+        >
           <div slot="header" class="clearfix">
-            <span>职称评审</span>
-            <el-button style="float: right; padding: 3px 0" type="text"
-              >编辑</el-button
-            >
+            
+            <el-row :gutter="20">
+              
+              <el-col :span="22"><span>职称评审</span></el-col>
+              <!-- <el-col :span="8"><div class="grid-content bg-purple"></div></el-col> -->
+                            <el-col :span="1">&nbsp;<el-button v-if="item.status==0" style="float: right; padding: 3px 0" type="text" @click="edit(item.id)">编辑</el-button></el-col>
+              <el-col :span="1"><el-button style="float: right; padding: 3px 0" type="text" @click="details(item.id)">详情</el-button></el-col>
+
+         
+            </el-row>
           </div>
           <table>
             <tr>
@@ -43,18 +55,18 @@
             </tr>
             <tr>
               <td>拟申报资格名称</td>
-              <td>{{ item.source }}/{{  item.level | award }}</td>
+              <td>{{ item.source }}/{{ item.level | award }}</td>
               <td>评审会名称</td>
               <td>{{ item.jury }}</td>
             </tr>
             <tr>
               <td>评审等级</td>
-              <td>{{  item.level | award }}</td>
+              <td>{{ item.level | award }}</td>
               <td>创建时间</td>
               <td>{{ item.createTime }}</td>
             </tr>
           </table>
-        </el-card>   
+        </el-card>
       </el-card>
 
       <div class="mask" ref="mask"></div>
@@ -62,7 +74,8 @@
     <el-dialog
       title="选择评审会"
       :visible.sync="educationDialogVisible"
-      width="55%">
+      width="55%"
+    >
       <el-form label-position="right" label-width="125px">
         <el-form-item label="申报等级">
           <el-radio-group v-model="form.level" style="width:100%">
@@ -264,6 +277,16 @@ export default {
         ];
       }
     },
+    edit(id){
+            localStorage.setItem("evaluation_id",id)
+               localStorage.setItem("op",1)
+                this.$router.push("agreement")
+    },
+    details(id){
+             localStorage.setItem("evaluation_id",id)
+                localStorage.setItem("op",2)
+                 this.$router.push("agreement")
+    },
    async handleSubmit(){
      let level = this.form.level
      let form = this.form
@@ -280,9 +303,15 @@ export default {
      if(res.code == 0){
 
        localStorage.setItem("evaluation_id",res.data.id)
-         localStorage.setItem("op",0)
+        localStorage.setItem("op",0)
        this.$router.push("agreement")
      }
+    },
+    async getData() {
+      const res = await api.list(-1);
+      if (res.code == 0) {
+        this.data = res.data.list;
+      }
     }
   }
 };

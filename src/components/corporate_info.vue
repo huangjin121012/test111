@@ -20,7 +20,7 @@
           <el-table-column label="操作">
           <template v-if="scope.row.status === 0" slot-scope="scope">
             <el-button type="primary" size="mini"    @click="handleClick(scope.row.id)">审核</el-button>
-        <!-- <el-button type="danger" size="mini"    @click="handleClick(scope.row,false)">驳回</el-button> -->
+
           </template>
         </el-table-column>
       </el-table>
@@ -51,7 +51,6 @@ export default {
    async  getList(){
       const res = await api.list(-1)
       if(res.code ==0){
-        console.log(res);
         this.list = res.data.list
       }
     },   

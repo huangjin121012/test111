@@ -1,4 +1,4 @@
-<template>
+git<template>
   <div>
     <div class="form1">
       <form action="">
@@ -174,7 +174,7 @@
                   :show-file-list="false"
                   :on-success="handleAvatarSuccess"
                 >
-                  <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                  <img v-if="formdata.ag_01.frontUrl" :src="formdata.ag_01.frontUrl" class="avatar" />
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </h4>
@@ -191,7 +191,7 @@
                   :show-file-list="false"
                   :on-success="handleAvatarSuccess1"
                 >
-                  <img v-if="imageUrl1" :src="imageUrl1" class="avatar" />
+                  <img v-if="formdata.ag_01.reverseUrl" :src="formdata.ag_01.reverseUrl" class="avatar" />
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </h4>
@@ -208,7 +208,7 @@
                   :show-file-list="false"
                   :on-success="handleAvatarSuccess1"
                 >
-                  <img v-if="imageUrl2" :src="imageUrl1" class="avatar" />
+                  <img v-if="formdata.ag_01.image" :src="formdata.ag_01.image" class="avatar" />
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </h4>
