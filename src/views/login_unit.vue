@@ -160,6 +160,7 @@ export default {
                 this.msg = res.data.msg
                 this.$router.push('/main')
                 console.log(this.msg)
+                localStorage.setItem("role",1)
                 this.loading = false
               }
               else {

@@ -93,7 +93,13 @@ export default {
                    image: '',
                    jury: '',
                    unitLevel: '',
-                   summarize: ''
+                   summarize: '',
+                   reviewYear: '',
+                   hometown: '',
+                   fillingTime: '',
+                   contactAddress: '',
+                   assessedMajor: '',
+                   professionalSeries: ''
                 },
                  ag_02:{
                    list:[]

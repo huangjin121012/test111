@@ -128,6 +128,7 @@ export default {
             console.log(res)
             if (res.code === 0) {
                 localStorage.setItem("user_id", resp.id);
+                localStorage.setItem("role",0)
               this.loginSuccess()
             } 
           })

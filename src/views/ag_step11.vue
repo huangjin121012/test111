@@ -7,6 +7,7 @@
     </div>
 </template>
 <script>
+import { Message } from "element-ui";
 export default {
   name: "ag_step11",
   props: {
@@ -14,6 +15,11 @@ export default {
   },methods:{
        save() {
         localStorage.setItem("evaluation_id_"+this.evaluation_id ,JSON.stringify(this.formdata.ag_01) );
+         Message({
+          message: "保存成功",
+          type: "success",
+          duration: 2 * 1000
+        });
     },
   }
 };
